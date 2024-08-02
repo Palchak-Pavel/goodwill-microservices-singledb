@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{01CAAA4F-BA41-4422-BAE3-DF72AE4380D2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{9155F815-D2ED-4550-B9CF-82782F0D1312}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{683BF72E-B794-406E-9254-672D63396100}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{42CCE3EA-78EA-4474-8DED-CEE5DAD24F3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodwillSingledb.Domain", "GoodwillSingledb.Domain\GoodwillSingledb.Domain.csproj", "{9937FC23-49A5-4342-9045-496014762744}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodwillSingledb.Application", "GoodwillSingledb.Application\GoodwillSingledb.Application.csproj", "{1C60E3D7-7222-4F71-AD0C-93FD4C43EFF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodwillSingledb.Persistence", "GoodwillSingledb.Persistence\GoodwillSingledb.Persistence.csproj", "{E9290C56-D59D-498A-826D-8940A8264254}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodwillSingledb.WebApi", "GoodwillSingledb.WebApi\GoodwillSingledb.WebApi.csproj", "{AB958BA8-4F59-48DA-B8FA-E5CFA90AF477}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9937FC23-49A5-4342-9045-496014762744}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9937FC23-49A5-4342-9045-496014762744}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9937FC23-49A5-4342-9045-496014762744}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9937FC23-49A5-4342-9045-496014762744}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C60E3D7-7222-4F71-AD0C-93FD4C43EFF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C60E3D7-7222-4F71-AD0C-93FD4C43EFF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C60E3D7-7222-4F71-AD0C-93FD4C43EFF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C60E3D7-7222-4F71-AD0C-93FD4C43EFF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9290C56-D59D-498A-826D-8940A8264254}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9290C56-D59D-498A-826D-8940A8264254}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9290C56-D59D-498A-826D-8940A8264254}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9290C56-D59D-498A-826D-8940A8264254}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB958BA8-4F59-48DA-B8FA-E5CFA90AF477}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB958BA8-4F59-48DA-B8FA-E5CFA90AF477}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB958BA8-4F59-48DA-B8FA-E5CFA90AF477}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB958BA8-4F59-48DA-B8FA-E5CFA90AF477}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9937FC23-49A5-4342-9045-496014762744} = {01CAAA4F-BA41-4422-BAE3-DF72AE4380D2}
+		{1C60E3D7-7222-4F71-AD0C-93FD4C43EFF4} = {01CAAA4F-BA41-4422-BAE3-DF72AE4380D2}
+		{E9290C56-D59D-498A-826D-8940A8264254} = {9155F815-D2ED-4550-B9CF-82782F0D1312}
+		{AB958BA8-4F59-48DA-B8FA-E5CFA90AF477} = {683BF72E-B794-406E-9254-672D63396100}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C183FE33-2B96-4849-9644-32CDE3A1BD5F}
+	EndGlobalSection
+EndGlobal
