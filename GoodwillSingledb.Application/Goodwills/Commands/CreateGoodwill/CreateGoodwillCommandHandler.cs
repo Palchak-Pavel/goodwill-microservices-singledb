@@ -7,26 +7,26 @@ using GoodwillSingledb.Application.Interfaces;
 namespace GoodwillSingledb.Application.Goodwills.Commands.CreateGoodwill
 {
     public class CreateGoodwillCommandHandler
-        :IRequestHandler<CreateGoodwillCommandHandler, Guid>
+        // что-то сделать с Guid
+        : IRequestHandler<CreateGoodwillCommand, Guid>
     {
-        private readonly IPartnerDbContext _dbContext;
-        public CreateGoodwillCommandHandler(IPartnerDbContext dbContext) =>
+        private readonly IPartenrsDbContext _dbContext;
+        public CreateGoodwillCommandHandler(IPartenrsDbContext dbContext) =>
             _dbContext = dbContext;
-        public async Task<Guid> Handle(CreateGoodwillCommandHandler request,
+        public async Task<Guid> Handle(CreateGoodwillCommand request,
             CancellationToken cancellationToken)
         {
-            //fghfghffh
-            var entry = new Entry
+            
+            var partner = new Partner
             {
-                Id = Guid.NewGuid(),
                 PartenrID = request.PartenrID,
-                Code1CNew = request.Code1CNew,
+                Name = request.Name,
+                ContractNum = request.ContractNum,
                 CreationDate = DateTime.Now,
-                Name = request.Name;
-            };
-            await _dbContext.Entry.AddAsync(entry, cancellationToken);
+             };
+            await _dbContext.Partners.AddAsync(partner, cancellationToken);
             await _dbContext.SaveChangesAsync(cancellationToken);
-            return entry.Id;
+            return partner.PartenrID;
         }
     }
 }
