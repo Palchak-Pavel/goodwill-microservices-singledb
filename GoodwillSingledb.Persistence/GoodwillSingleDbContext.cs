@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GoodwillSingledb.Persistence
 {
-    public class GoodwillSingleDbContext : DbContext, IPartenrsDbContext
+    public class GoodwillSingleDbContext : DbContext, IGoodwillSingleDbContext
     {
         public DbSet<Partner> Partners { get; set; }
 

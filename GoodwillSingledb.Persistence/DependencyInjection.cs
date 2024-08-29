@@ -15,10 +15,10 @@ namespace GoodwillSingledb.Persistence
                 var connectionString = configuration["DbConnection"];
                 services.AddDbContext<GoodwillSingleDbContext>(options =>
                 {
-                    options.UseSqllite(connectionString);
+                    object value = options.UseSqlServer(@"Server=ms-sql2\GoodWill_New;Database=helloappdb;Trusted_Connection=True;");
                 });
                 services.AddScoped<IGoodwillSingleDbContext>(provider =>
-                provider.GetService<GoodwillSingleDbContext>());
+                 provider.GetService<GoodwillSingleDbContext>());
                 return services;
             }
         }
