@@ -5,7 +5,7 @@ using MediatR;
 
 namespace GoodwillSingledb.Application.Goodwills.Commands.Partners
 {
-    public class PartnerCreateCommand: IRequest<int>
+    public class CreatePartnerCommand : IRequest<int>
     {
         public int PartenrID { get; set; }
         public int? BusinessID { get; set; }
@@ -45,10 +45,10 @@ namespace GoodwillSingledb.Application.Goodwills.Commands.Partners
         public string Comment { get; set; }
     }
 
-    public class PartnerCreateCommandHandler : IRequestHandler<PartnerCreateCommand, int>
+    public class PartnerCreateCommandHandler : IRequestHandler<CreatePartnerCommand, int>
     {
         private readonly IGoodwillSingleDbContext _dbContext;
-        public async Task<int> Handle(PartnerCreateCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(CreatePartnerCommand request, CancellationToken cancellationToken)
         {
             var partner = new Partner
             {

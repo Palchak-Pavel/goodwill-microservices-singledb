@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GoodwillSingledb.Application.Goodwills.Commands.Partners
 {
-    public class PartnerUpdateCommand : IRequest
+    public class UpdatePartnerCommand : IRequest
     {
         public int PartenrID { get; set; }
         public int? BusinessID { get; set; }
@@ -52,7 +52,7 @@ namespace GoodwillSingledb.Application.Goodwills.Commands.Partners
         private readonly IGoodwillSingleDbContext _dbContext;
        // public PartnerUpdateCommandHandler(IGoodwillSingleDbContext dbContext) =>
         //   _dbContext = dbContext;
-        public async Task<Unit> Handle(PartnerUpdateCommand request,
+        public async Task<Unit> Handle(UpdatePartnerCommand request,
             CancellationToken cancellationToken)
         {
             var entity = await _dbContext.Partners.FirstOrDefaultAsync(partner =>
