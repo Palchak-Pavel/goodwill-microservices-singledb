@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using GoodwillSingledb.Application;
 using System.Reflection;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,14 +23,18 @@ builder.Services.AddAutoMapper(config =>
 //    });
 //});
 
-builder.Services.AddMediatR(cfg =>
-{
-    cfg.RegisterServicesFromAssembly(typeof(GoodwillSingledb.Application.DependencyInjection).Assembly);
-});
+// builder.Services.AddMediatR(cfg =>
+// {
+//     cfg.RegisterServicesFromAssembly(typeof(GoodwillSingledb.Application.DependencyInjection).Assembly);
+// });
 //builder.Services.AddMediatR(typeof(GoodwillSingledb.Application.DependencyInjection).Assembly);
 //builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 //builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
 builder.Services.AddScoped<IGoodwillSingleDbContext, GoodwillSingleDbContext>();
+
+var connectionString = builder.Configuration.GetConnectionString("DbConnection");
+builder.Services.AddDbContext<GoodwillSingleDbContext>(options => options.UseSqlServer(connectionString));
+
 builder.Services.AddAutoMapper(typeof(AssemblyMappingProfile));
 builder.Services.AddApplication();
 //builder.Services.AddPersistence(Configuration);
@@ -39,12 +44,12 @@ host.Run();
 //}
 app.UseHttpsRedirection();
 app.UseCors(devCorsPolicy);
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapGet("/", async context =>
-    {
-        await context.Response.WriteAsync("Hello World!");
-    });
-    endpoints.MapControllers();
-});
+// app.UseEndpoints(endpoints =>
+// {
+//     endpoints.MapGet("/", async context =>
+//     {
+//         await context.Response.WriteAsync("Hello World!");
+//     });
+//     endpoints.MapControllers();
+// });
 

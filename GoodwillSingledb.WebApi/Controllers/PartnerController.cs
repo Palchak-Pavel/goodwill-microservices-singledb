@@ -41,7 +41,7 @@ namespace GoodwillSingledb.WebApi.Controllers
             var command = _mapper.Map<UpdatePartnerCommand>(updatePartnerDto);
             command.PartenrID = id;
             await Mediator.Send(command);
-            return Ok(NoContent);
+            return NoContent();
         }
 
     }
