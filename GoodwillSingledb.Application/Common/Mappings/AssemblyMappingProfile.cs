@@ -5,6 +5,10 @@ namespace GoodwillSingledb.Application.Common.Mappings
 {
     public class AssemblyMappingProfile : Profile
     {
+        public AssemblyMappingProfile()
+        {
+        }
+
         public AssemblyMappingProfile(Assembly assembly) =>
             ApplyMappingsFromAssembly(assembly);
         private void ApplyMappingsFromAssembly(Assembly assembly)

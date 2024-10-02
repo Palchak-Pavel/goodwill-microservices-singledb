@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using GoodwillSingledb.Application.Common.Mappings;
 
 
 namespace GoodwillSingledb.Application
@@ -14,6 +15,8 @@ namespace GoodwillSingledb.Application
             {
                 cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
             });
+            
+            services.AddAutoMapper(typeof(AssemblyMappingProfile));
             return services;
         }
     }

@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GoodwillSingledb.WebApi.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]/[action]")]
+    // [ApiController]
+    // [Route("api/v1/[controller]/[action]")]
     public abstract class BaseController : ControllerBase
     {
     private IMediator _mediator;

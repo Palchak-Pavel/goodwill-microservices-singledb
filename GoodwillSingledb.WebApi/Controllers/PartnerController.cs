@@ -3,16 +3,24 @@ using GoodwillSingledb.Application.Goodwills.Commands.Partners;
 using GoodwillSingledb.Application.Goodwills.Commands.Partners.Queries.GetPartnerDetails;
 using GoodwillSingledb.Persistence.Models;
 using GoodwillSingledb.WebApi.Models;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GoodwillSingledb.WebApi.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
-    public class PartnerController : BaseController
+    public class PartnerController : ControllerBase
     {
         private readonly IMapper _mapper;
+        private readonly IMediator _mediator;
 
-        public PartnerController(IMapper mapper) => _mapper = mapper;
+        public PartnerController(IMapper mapper, IMediator mediator)
+        {
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+        }
+
 
         [HttpGet]
         [Route("{id}")]
@@ -22,7 +30,7 @@ namespace GoodwillSingledb.WebApi.Controllers
             {
                 PartenrID = id
             };
-            var vm = await Mediator.Send(query);
+            var vm = await _mediator.Send(query);
             return Ok(vm);
         }
         [HttpPost]
@@ -31,7 +39,7 @@ namespace GoodwillSingledb.WebApi.Controllers
         {
             var command =_mapper.Map<CreatePartnerCommand>(createPartnerDto);
             command.PartenrID = id;
-            var partnerId = await Mediator.Send(command);
+            var partnerId = await _mediator.Send(command);
             return Ok(partnerId);
         }
 
@@ -40,7 +48,7 @@ namespace GoodwillSingledb.WebApi.Controllers
         {
             var command = _mapper.Map<UpdatePartnerCommand>(updatePartnerDto);
             command.PartenrID = id;
-            await Mediator.Send(command);
+            await _mediator.Send(command);
             return NoContent();
         }
 
