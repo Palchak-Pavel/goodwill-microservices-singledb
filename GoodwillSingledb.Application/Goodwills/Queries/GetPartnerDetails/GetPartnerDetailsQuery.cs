@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace GoodwillSingledb.Application.Goodwills.Commands.Partners.Queries.GetPartnerDetails
+namespace GoodwillSingledb.Application.Goodwills.Queries.GetPartnerDetails
 {
     public class GetPartnerDetailsQuery : IRequest<PartnerDetailsVm>
     {

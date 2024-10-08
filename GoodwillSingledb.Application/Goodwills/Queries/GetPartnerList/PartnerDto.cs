@@ -2,7 +2,7 @@
 using GoodwillSingledb.Application.Common.Mappings;
 using GoodwillSingledb.Domain;
 
-namespace GoodwillSingledb.Application.Goodwills.Commands.Partners.Queries.GetPartnerList
+namespace GoodwillSingledb.Application.Goodwills.Queries.GetPartnerList
 {
     public class PartnerDto : IMapWith<Partner>
     {
@@ -51,7 +51,7 @@ namespace GoodwillSingledb.Application.Goodwills.Commands.Partners.Queries.GetPa
                 .ForMember(partnerVm => partnerVm.CuratorID,
                 opt => opt.MapFrom(partner => partner.CuratorID))
                 .ForMember(partnerVm => partnerVm.ParentPartenrID,
-                opt => opt.MapFrom(partner => partner.ParentPartenrID))
+                opt => opt.MapFrom(partner => partner.ParentPartnerID))
                 .ForMember(partnerVm => partnerVm.FirmID,
                 opt => opt.MapFrom(partner => partner.FirmID))
                 .ForMember(partnerVm => partnerVm.DeliveryTypeID,

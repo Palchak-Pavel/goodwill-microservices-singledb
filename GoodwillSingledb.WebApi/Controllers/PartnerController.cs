@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using GoodwillSingledb.Application.Goodwills.Commands.Partners;
-using GoodwillSingledb.Application.Goodwills.Commands.Partners.Queries.GetPartnerDetails;
-using GoodwillSingledb.Persistence.Models;
+using GoodwillSingledb.Application.Goodwills.Queries.GetPartnerDetails;
 using GoodwillSingledb.WebApi.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

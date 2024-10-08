@@ -4,8 +4,7 @@ using GoodwillSingledb.Application.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-
-namespace GoodwillSingledb.Application.Goodwills.Commands.Partners.Queries.GetPartnerList
+namespace GoodwillSingledb.Application.Goodwills.Queries.GetPartnerList
 {
     public class GetPartnerListQueryHandler
         : IRequestHandler<GetPartnerListQuery, PartnerListVm>
@@ -20,7 +19,7 @@ namespace GoodwillSingledb.Application.Goodwills.Commands.Partners.Queries.GetPa
             CancellationToken cancellationToken)
         {
             var partnersQuery = await _dbcontext.Partners
-                .Where(partner => partner.PartenrID == request.PartenrID)
+                .Where(partner => partner.PartnerID == request.PartenrID)
                 .ProjectTo<PartnerDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
             return new PartnerListVm { PartnerDtos = partnersQuery };

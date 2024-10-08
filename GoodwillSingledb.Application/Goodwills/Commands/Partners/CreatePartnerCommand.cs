@@ -52,10 +52,10 @@ namespace GoodwillSingledb.Application.Goodwills.Commands.Partners
         {
             var partner = new Partner
             {
-                PartenrID = request.PartenrID,
+                PartnerID = request.PartenrID,
                 BusinessID = request.BusinessID,
                 CuratorID = request.CuratorID,
-                ParentPartenrID =   request.ParentPartenrID,
+                ParentPartnerID =   request.ParentPartenrID,
                 FirmID = request.FirmID,
                 DeliveryTypeID = request.DeliveryTypeID,
                 PriceRangeID = request.PriceRangeID,
@@ -92,7 +92,7 @@ namespace GoodwillSingledb.Application.Goodwills.Commands.Partners
             };
             await _dbContext.Partners.AddAsync(partner, cancellationToken);
             await _dbContext.SaveChangesAsync(cancellationToken);
-            return partner.PartenrID;
+            return partner.PartnerID;
         }
     }
 }

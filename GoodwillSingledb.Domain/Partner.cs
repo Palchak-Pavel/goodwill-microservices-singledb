@@ -9,10 +9,12 @@ namespace GoodwillSingledb.Domain
 {
     public class Partner : Entity
     {
-        public int PartenrID { get; set; }
+        // public int PartenrID { get; set; }
+        //TODO: должно либо совпадать по названию с полем таблицы, либо должен быть специальный конфиг. В общем внимательней
+        public int PartnerID { get; set; }
         public int? BusinessID { get; set; }
         public int CuratorID { get; set; }
-        public int? ParentPartenrID { get; set; }
+        public int? ParentPartnerID { get; set; }
         public int FirmID{ get; set; }
         public int DeliveryTypeID { get; set; }
         public int PriceRangeID { get; set; }
@@ -34,9 +36,11 @@ namespace GoodwillSingledb.Domain
         public string RealizeDocsType { get; set; }
         public bool DiadocIncomeDocsHandle { get; set; }
         public bool Federal { get; set; }
-        public string ContractNum { get; set; }
+        public string? ContractNum { get; set; }
         public DateTime? ContractCreatedAt { get; set; }
-        public bool WithNds{ get; set; }
+        
+        //TODO: в базе это поле nullable. Не знаю почему так получилось, но проще пока в коде это учесть, чем базу на ходу править
+        public bool? WithNds{ get; set; }
         public string TransportAddress { get; set; }
         public string TransportName { get; set; }
         public string TransportPhone { get; set; }

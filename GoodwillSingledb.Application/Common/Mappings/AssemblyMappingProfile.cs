@@ -7,6 +7,7 @@ namespace GoodwillSingledb.Application.Common.Mappings
     {
         public AssemblyMappingProfile()
         {
+            ApplyMappingsFromAssembly(typeof(AssemblyMappingProfile).Assembly);
         }
 
         public AssemblyMappingProfile(Assembly assembly) =>

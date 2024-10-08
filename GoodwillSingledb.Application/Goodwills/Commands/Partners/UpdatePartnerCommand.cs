@@ -56,16 +56,20 @@ namespace GoodwillSingledb.Application.Goodwills.Commands.Partners
             CancellationToken cancellationToken)
         {
             var entity = await _dbContext.Partners.FirstOrDefaultAsync(partner =>
-            partner.PartenrID == request.PartenrID, cancellationToken);
-            if (entity == null || entity.PartenrID != request.PartenrID)
+            partner.PartnerID == request.PartenrID, cancellationToken);
+            if (entity == null || entity.PartnerID != request.PartenrID)
             {
                 throw new NotFoundException(nameof(Partner), request.PartenrID);
             }
 
-            entity.PartenrID = request.PartenrID;
+            //TODO: идентификаторы нельзя обновлять ни в коем случае.
+            //Во-первых, он не обновится на уровне бд, т.к. там стоит запрет на обновление первичных ключей
+            //Во-вторых, как искать сущность, если у нее каждый раз разрный Id??? 
+            //Идентификатор фиксируется один раз в момент создания сущности, затем больше никогда не меняется
+            //entity.PartnerID = request.PartenrID;
             entity.BusinessID = request.BusinessID;
             entity.CuratorID = request.CuratorID;
-            entity.ParentPartenrID = request.ParentPartenrID;
+            entity.ParentPartnerID = request.ParentPartenrID;
             entity.FirmID = request.FirmID;
             entity.DeliveryTypeID = request.DeliveryTypeID;
             entity.PriceRangeID = request.PriceRangeID;

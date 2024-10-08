@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
+using GoodwillSingledb.Application.Common.Exceptions;
 using GoodwillSingledb.Application.Interfaces;
+using GoodwillSingledb.Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using GoodwillSingledb.Domain;
-using GoodwillSingledb.Application.Common.Exceptions;
 
-
-namespace GoodwillSingledb.Application.Goodwills.Commands.Partners.Queries.GetPartnerDetails
+namespace GoodwillSingledb.Application.Goodwills.Queries.GetPartnerDetails
 {
     public class GetPartnerDetailsQueryHandler
         : IRequestHandler<GetPartnerDetailsQuery, PartnerDetailsVm>
@@ -21,8 +20,8 @@ namespace GoodwillSingledb.Application.Goodwills.Commands.Partners.Queries.GetPa
         {
             var entity = await _dbContext.Partners
                 .FirstOrDefaultAsync(partner =>
-                partner.PartenrID == request.PartenrID, cancellationToken);
-            if (entity == null || entity.PartenrID != request.PartenrID)
+                partner.PartnerID == request.PartenrID, cancellationToken);
+            if (entity == null || entity.PartnerID != request.PartenrID)
             {
                 throw new NotFoundException(nameof(Partner), request.PartenrID);
             }

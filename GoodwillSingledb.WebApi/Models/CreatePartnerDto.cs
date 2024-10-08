@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
-using GoodwillSingledb.Application.Goodwills.Commands.Partners;
-using GoodwillSingledb.Application.Goodwills.Commands.Partners.Queries.GetPartnerList;
-using GoodwillSingledb.Domain;
 using GoodwillSingledb.Application.Common.Mappings;
+using GoodwillSingledb.Application.Goodwills.Commands.Partners;
 
-
-namespace GoodwillSingledb.Persistence.Models
+namespace GoodwillSingledb.WebApi.Models
 {
     public class CreatePartnerDto : IMapWith<CreatePartnerCommand>
     {

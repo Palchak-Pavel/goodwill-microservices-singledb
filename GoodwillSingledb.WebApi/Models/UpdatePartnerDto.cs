@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using GoodwillSingledb.Application.Common.Mappings;
 using GoodwillSingledb.Application.Goodwills.Commands.Partners;
-using GoodwillSingledb.Application.Goodwills.Commands.Partners.Queries.GetPartnerList;
 
 namespace GoodwillSingledb.WebApi.Models
 {
