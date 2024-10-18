@@ -7,12 +7,12 @@ namespace GoodwillSingledb.Application.Goodwills.Commands.Partners
 {
     public class CreatePartnerCommand : IRequest<int>
     {
-        public int PartenrID { get; set; }
+        public int PartnerID { get; set; }
         public int? BusinessID { get; set; }
         public int CuratorID { get; set; }
-        public int? ParentPartenrID { get; set; }
+        public int? ParentPartnerID { get; set; }
         public int FirmID { get; set; }
-        public int DeliveryTypeID { get; set; }
+        public DeliveryTypes DeliveryTypeID { get; set; }
         public int PriceRangeID { get; set; }
         public int RestExportTypeID { get; set; }
         public int BlockTypeID { get; set; }
@@ -52,10 +52,10 @@ namespace GoodwillSingledb.Application.Goodwills.Commands.Partners
         {
             var partner = new Partner
             {
-                PartnerID = request.PartenrID,
+                PartnerID = request.PartnerID,
                 BusinessID = request.BusinessID,
                 CuratorID = request.CuratorID,
-                ParentPartnerID =   request.ParentPartenrID,
+                ParentPartnerID =   request.ParentPartnerID,
                 FirmID = request.FirmID,
                 DeliveryTypeID = request.DeliveryTypeID,
                 PriceRangeID = request.PriceRangeID,

@@ -4,6 +4,6 @@ namespace GoodwillSingledb.Application.Goodwills.Queries.GetPartnerList
 {
     public class GetPartnerListQuery : IRequest<PartnerListVm>
     {
-        public int PartenrID { get; set; }
+        public int? CuratorID { get; set; }
     }
 }

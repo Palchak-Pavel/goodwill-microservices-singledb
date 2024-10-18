@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using GoodwillSingledb.Application.Interfaces;
+using GoodwillSingledb.Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,8 +19,14 @@ namespace GoodwillSingledb.Application.Goodwills.Queries.GetPartnerList
         public async Task<PartnerListVm> Handle(GetPartnerListQuery request,
             CancellationToken cancellationToken)
         {
-            var partnersQuery = await _dbcontext.Partners
-                .Where(partner => partner.PartnerID == request.PartenrID)
+            var partners = _dbcontext.Partners.AsQueryable();
+            if(request.CuratorID != null)
+            {
+                partners.Where(x => x.CuratorID == request.CuratorID && x.IsShown);
+            }
+
+            var partnersQuery = await partners
+                //.Where(partner => partner.PartnerID == request.PartnerID)
                 .ProjectTo<PartnerDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
             return new PartnerListVm { PartnerDtos = partnersQuery };

@@ -9,12 +9,12 @@ namespace GoodwillSingledb.Application.Goodwills.Commands.Partners
 {
     public class UpdatePartnerCommand : IRequest
     {
-        public int PartenrID { get; set; }
+        public int PartnerID { get; set; }
         public int? BusinessID { get; set; }
         public int CuratorID { get; set; }
-        public int? ParentPartenrID { get; set; }
+        public int? ParentPartnerID { get; set; }
         public int FirmID { get; set; }
-        public int DeliveryTypeID { get; set; }
+        public DeliveryTypes DeliveryTypeID { get; set; }
         public int PriceRangeID { get; set; }
         public int RestExportTypeID { get; set; }
         public int BlockTypeID { get; set; }
@@ -39,7 +39,7 @@ namespace GoodwillSingledb.Application.Goodwills.Commands.Partners
         public bool WithNds { get; set; }
         public string TransportAddress { get; set; }
         public string TransportName { get; set; }
-        public string TransportPhone { get; set; }
+        public string TransportPhone { get; set; } = null!;
         public string ReceiverAddress { get; set; }
         public string ReceiverName { get; set; }
         public string ReceiverPhone { get; set; }
@@ -56,20 +56,20 @@ namespace GoodwillSingledb.Application.Goodwills.Commands.Partners
             CancellationToken cancellationToken)
         {
             var entity = await _dbContext.Partners.FirstOrDefaultAsync(partner =>
-            partner.PartnerID == request.PartenrID, cancellationToken);
-            if (entity == null || entity.PartnerID != request.PartenrID)
+            partner.PartnerID == request.PartnerID, cancellationToken);
+            if (entity == null || entity.PartnerID != request.PartnerID)
             {
-                throw new NotFoundException(nameof(Partner), request.PartenrID);
+                throw new NotFoundException(nameof(Partner), request.PartnerID);
             }
 
             //TODO: идентификаторы нельзя обновлять ни в коем случае.
             //Во-первых, он не обновится на уровне бд, т.к. там стоит запрет на обновление первичных ключей
             //Во-вторых, как искать сущность, если у нее каждый раз разрный Id??? 
             //Идентификатор фиксируется один раз в момент создания сущности, затем больше никогда не меняется
-            //entity.PartnerID = request.PartenrID;
+            //entity.PartnerID = request.PartnerID;
             entity.BusinessID = request.BusinessID;
             entity.CuratorID = request.CuratorID;
-            entity.ParentPartnerID = request.ParentPartenrID;
+            entity.ParentPartnerID = request.ParentPartnerID;
             entity.FirmID = request.FirmID;
             entity.DeliveryTypeID = request.DeliveryTypeID;
             entity.PriceRangeID = request.PriceRangeID;

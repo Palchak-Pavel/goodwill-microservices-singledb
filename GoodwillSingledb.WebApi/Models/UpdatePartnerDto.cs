@@ -6,10 +6,10 @@ namespace GoodwillSingledb.WebApi.Models
 {
     public class UpdatePartnerDto : IMapWith<UpdatePartnerCommand>
     {
-        public int PartenrID { get; set; }
+        public int PartnerID { get; set; }
         public int? BusinessID { get; set; }
         public int CuratorID { get; set; }
-        public int? ParentPartenrID { get; set; }
+        public int? ParentPartnerID { get; set; }
         public int FirmID { get; set; }
         public int DeliveryTypeID { get; set; }
         public int PriceRangeID { get; set; }
@@ -46,14 +46,14 @@ namespace GoodwillSingledb.WebApi.Models
         public void Mapping(Profile profile)
         {
             profile.CreateMap<UpdatePartnerDto, UpdatePartnerCommand>()
-                .ForMember(partnerCommand => partnerCommand.PartenrID,
-                opt => opt.MapFrom(partnerDto => partnerDto.PartenrID))
+                .ForMember(partnerCommand => partnerCommand.PartnerID,
+                opt => opt.MapFrom(partnerDto => partnerDto.PartnerID))
                 .ForMember(partnerCommand => partnerCommand.BusinessID,
                 opt => opt.MapFrom(partnerDto => partnerDto.BusinessID))
                 .ForMember(partnerCommand => partnerCommand.CuratorID,
                 opt => opt.MapFrom(partnerDto => partnerDto.CuratorID))
-                .ForMember(partnerCommand => partnerCommand.ParentPartenrID,
-                opt => opt.MapFrom(partnerDto => partnerDto.ParentPartenrID))
+                .ForMember(partnerCommand => partnerCommand.ParentPartnerID,
+                opt => opt.MapFrom(partnerDto => partnerDto.ParentPartnerID))
                 .ForMember(partnerCommand => partnerCommand.FirmID,
                 opt => opt.MapFrom(partnerDto => partnerDto.FirmID))
                 .ForMember(partnerCommand => partnerCommand.DeliveryTypeID,

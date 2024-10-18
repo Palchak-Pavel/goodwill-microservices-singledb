@@ -6,6 +6,8 @@ using GoodwillSingledb.Application;
 using System.Reflection;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Builder;
+using GoodwillSingledb.Application.Goodwills.Commands.Partners;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
@@ -15,12 +17,24 @@ builder.Services.AddApplication();
 
 //TODO: Вопрос №2: почему метод AddApplication тут ты вызывал, а метод AddPersistence нет
 builder.Services.AddPersistence(builder.Configuration);
-
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 //TODO: Вопрос №3: Если весь маппинг в проекте Application, почему эту конфигурацию не убрать внутрь метода AddApplication?
 //builder.Services.AddAutoMapper(typeof(AssemblyMappingProfile));
 
+
 var app = builder.Build();
 app.UseHttpsRedirection();
+app.UseSwagger();
+app.UseSwaggerUI();
+//app.UseSwaggerUI(config =>
+//{
+
+//    config.SwaggerEndpoint("/swagger/api/swagger.json", "Web API");
+//    config.RoutePrefix = string.Empty;
+
+//});
+
 //app.UseCors(devCorsPolicy);
 app.MapControllers();
 app.Run();

@@ -6,10 +6,10 @@ namespace GoodwillSingledb.Application.Goodwills.Queries.GetPartnerList
 {
     public class PartnerDto : IMapWith<Partner>
     {
-        public int PartenrID { get; set; }
+        public int PartnerID { get; set; }
         public int? BusinessID { get; set; }
         public int CuratorID { get; set; }
-        public int? ParentPartenrID { get; set; }
+        public int? ParentPartnerID { get; set; }
         public int FirmID { get; set; }
         public int DeliveryTypeID { get; set; }
         public int PriceRangeID { get; set; }
@@ -50,7 +50,7 @@ namespace GoodwillSingledb.Application.Goodwills.Queries.GetPartnerList
                 opt => opt.MapFrom(partner => partner.BusinessID))
                 .ForMember(partnerVm => partnerVm.CuratorID,
                 opt => opt.MapFrom(partner => partner.CuratorID))
-                .ForMember(partnerVm => partnerVm.ParentPartenrID,
+                .ForMember(partnerVm => partnerVm.ParentPartnerID,
                 opt => opt.MapFrom(partner => partner.ParentPartnerID))
                 .ForMember(partnerVm => partnerVm.FirmID,
                 opt => opt.MapFrom(partner => partner.FirmID))

@@ -4,6 +4,7 @@ using GoodwillSingledb.Application.Interfaces;
 using GoodwillSingledb.Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using static GoodwillSingledb.Application.Goodwills.Queries.GetPartnerDetails.PartnerDetailsVm;
 
 namespace GoodwillSingledb.Application.Goodwills.Queries.GetPartnerDetails
 {
@@ -20,12 +21,24 @@ namespace GoodwillSingledb.Application.Goodwills.Queries.GetPartnerDetails
         {
             var entity = await _dbContext.Partners
                 .FirstOrDefaultAsync(partner =>
-                partner.PartnerID == request.PartenrID, cancellationToken);
-            if (entity == null || entity.PartnerID != request.PartenrID)
+                partner.PartnerID == request.PartnerID, cancellationToken);
+            if (entity == null || entity.PartnerID != request.PartnerID)
             {
-                throw new NotFoundException(nameof(Partner), request.PartenrID);
+                throw new NotFoundException(nameof(Partner), request.PartnerID);
             }
-            return _mapper.Map<PartnerDetailsVm>(entity);
+            var result = _mapper.Map<PartnerDetailsVm>(entity);
+            var delivery = _mapper.Map<DeliveryInfo>(entity);
+            var pricing = _mapper.Map<Pricing>(entity);
+            var legal = _mapper.Map<Legal>(entity);
+            var conturDiadoc = _mapper.Map<ConturDiadoc>(entity);
+            var safeStorage = _mapper.Map<SafeStorage>(entity); 
+
+            result.GetDeliveryInfos = delivery;
+            result.Pricings = pricing;
+            result.GetLegal = legal;
+            result.ConturDiadocs = conturDiadoc;
+            result.SafeStorages = safeStorage;
+            return result;
         }
     }
 }

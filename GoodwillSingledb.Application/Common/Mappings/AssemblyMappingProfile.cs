@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
+using GoodwillSingledb.Application.Goodwills.Queries.GetPartnerDetails;
+using GoodwillSingledb.Domain;
 using System.Reflection;
+using static GoodwillSingledb.Application.Goodwills.Queries.GetPartnerDetails.PartnerDetailsVm;
 
 namespace GoodwillSingledb.Application.Common.Mappings
 {
@@ -8,6 +11,13 @@ namespace GoodwillSingledb.Application.Common.Mappings
         public AssemblyMappingProfile()
         {
             ApplyMappingsFromAssembly(typeof(AssemblyMappingProfile).Assembly);
+
+            CreateMap<Partner, PartnerDetailsVm>();
+            CreateMap<Partner, DeliveryInfo>();
+            CreateMap<Partner, Pricing>();
+            CreateMap<Partner, Legal>();
+            CreateMap<Partner, ConturDiadoc>();
+            CreateMap<Partner, SafeStorage>();
         }
 
         public AssemblyMappingProfile(Assembly assembly) =>
@@ -23,7 +33,6 @@ namespace GoodwillSingledb.Application.Common.Mappings
                 var instance = Activator.CreateInstance(type);
                 var methodInfo = type.GetMethod("Mapping");
                 methodInfo?.Invoke(instance, new object[] { this });
-
             }
         }
     }

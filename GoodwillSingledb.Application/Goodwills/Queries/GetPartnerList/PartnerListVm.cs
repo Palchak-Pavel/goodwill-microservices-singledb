@@ -1,4 +1,6 @@
-﻿namespace GoodwillSingledb.Application.Goodwills.Queries.GetPartnerList
+﻿using GoodwillSingledb.Domain;
+
+namespace GoodwillSingledb.Application.Goodwills.Queries.GetPartnerList
 {
     public class PartnerListVm
     {
