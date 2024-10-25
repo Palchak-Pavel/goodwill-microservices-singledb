@@ -1,81 +1,70 @@
-using GoodwillSingledb.Persistence;
-using GoodwillSingledb.Application.Common.Mappings;
-using GoodwillSingledb.Application.Interfaces;
-using Microsoft.Extensions.Configuration;
 using GoodwillSingledb.Application;
-using System.Reflection;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Builder;
-using GoodwillSingledb.Application.Goodwills.Commands.Partners;
+using GoodwillSingledb.Persistence;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Cryptography;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddControllers();
-
-
 builder.Services.AddApplication();
 
-//TODO: Вопрос №2: почему метод AddApplication тут ты вызывал, а метод AddPersistence нет
 builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-//TODO: Вопрос №3: Если весь маппинг в проекте Application, почему эту конфигурацию не убрать внутрь метода AddApplication?
-//builder.Services.AddAutoMapper(typeof(AssemblyMappingProfile));
-
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            // указывает, будет ли валидироваться издатель при валидации токена
+            ValidateIssuer = true,
+            // строка, представляющая издателя
+            ValidIssuer = AuthOptions.ISSUER,
+            // будет ли валидироваться потребитель токена
+            ValidateAudience = true,
+            // установка потребителя токена
+            ValidAudience = AuthOptions.Audience,
+            // будет ли валидироваться время существования
+            ValidateLifetime = true,
+            // установка ключа безопасности
+            IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
+            // валидация ключа безопасности
+            ValidateIssuerSigningKey = true,
+        };
+    });
 
 var app = builder.Build();
 app.UseHttpsRedirection();
 app.UseSwagger();
 app.UseSwaggerUI();
-//app.UseSwaggerUI(config =>
-//{
-
-//    config.SwaggerEndpoint("/swagger/api/swagger.json", "Web API");
-//    config.RoutePrefix = string.Empty;
-
-//});
-
-//app.UseCors(devCorsPolicy);
 app.MapControllers();
 app.Run();
-//var host = WebApplication.CreateBuilder(args).Build();
-//var devCorsPolicy = "devCorsPolicy";
-// builder.Services.AddAutoMapper(config =>
-// {
-//     config.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly()));
-//     config.AddProfile(new AssemblyMappingProfile(typeof(IGoodwillSingleDbContext).Assembly));
-// });
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy(devCorsPolicy, builder => {
-//        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-//    });
-//});
 
-// builder.Services.AddMediatR(cfg =>
-// {
-//     cfg.RegisterServicesFromAssembly(typeof(GoodwillSingledb.Application.DependencyInjection).Assembly);
-// });
-//builder.Services.AddMediatR(typeof(GoodwillSingledb.Application.DependencyInjection).Assembly);
-//builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
-//builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
+public static class HashAlgorithms
+{
+    public static string GetBySHA512(Encoding encoding, string stringToHash)
+    {
+        using (var provider = SHA512.Create())
+        {
+            var buffer = encoding.GetBytes(stringToHash);
+            var hashBytes = provider.ComputeHash(buffer);
+            var hash = hashBytes.Aggregate(string.Empty, (current, b) => current + $"{b:x2}");
+            return hash;
+        }
+    }
+}
 
-
-//var connectionString = builder.Configuration.GetConnectionString("DbConnection");
-
-
-//builder.Services.AddPersistence(Configuration);
-//builder.Services.AddControllers();
-
-//}
-
-
-// app.UseEndpoints(endpoints =>
-// {
-//     endpoints.MapGet("/", async context =>
-//     {
-//         await context.Response.WriteAsync("Hello World!");
-//     });
-//     endpoints.MapControllers();
-// });
-
+public static class AuthOptions
+{
+    private static readonly string _audience = "~3749#gfhp!3hgg_h8%43fe@wb4yu9h&$f3_2nf43i*03";
+    public const string ISSUER = "GoodWill_AuthServer";
+    public const int LIFETIME = 360;
+    public static string Audience => HashAlgorithms.GetBySHA512(Encoding.UTF8, _audience);
+    public static string Secret { get; } = "IxrAjDoa2FqElO7IhrSrUJELhUckePEPVpaePlS_Xaw";
+    public static SymmetricSecurityKey GetSymmetricSecurityKey()
+    {
+        return new SymmetricSecurityKey(Encoding.Unicode.GetBytes(Secret));
+    }
+}

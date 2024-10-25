@@ -8,6 +8,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using System.Collections;
 
 namespace GoodwillSingledb.WebApi.Controllers
 {
@@ -25,30 +26,33 @@ namespace GoodwillSingledb.WebApi.Controllers
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
+        
+        //[HttpGet]
 
-        [HttpGet]
-        // Необходимо создать дополнительный класс как GetPartnerListQuery для ролей?
-        // Прописать в Program
-        public async Task<ActionResult<PartnerListVm>> GetAll([FromQuery] GetPartnerListQuery query)
-        {
-            ClaimsIdentity identity = User.Identity as ClaimsIdentity;
-            if (identity.IsInRole(UserRoles.Manager))
-                query.CuratorID = identity.GetUserID();
-            if (identity.IsInRole(UserRoles.User))
-                query.ContactID = identity.GetUserID();
-
-            //var userid = User.Identity;
-            //var query = new GetPartnerListQuery();
-            var vm = await _mediator.Send(GetPartnerListQuery, PartnerListVm(query));
-            //return Ok(vm);
-            return Ok(vm);
-        }
+        //public async Task<PartnerDto[]> GetAll([FromBody] GetPartnerListQuery query)
+        //{
+        //    //var query = new GetPartnerListQuery();
+        //    //  var vm = await _mediator.Send(GetPartnerListQuery, PartnerListVm(query));
+        //    var identity = User.Identity as ClaimsIdentity;
+        //    int? userId;
+        //    if (identity.RoleClaimType.Equals("manager"))
+        //    {
+        //        var nameidentifier = identity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        //        int userid = 0;
+        //        if (int.TryParse(nameidentifier, out userid))
+        //            userId = userid;
+        //    }
+        //    //var command = _mapper.Map<Partner>(partnerDto);
+        //    //var query = await _mediator.Send(command)
+        //    return await _mediator.Send<GetPartnerListQuery, PartnerDto[]>(query);
+        //}
 
         [HttpGet]
         [Route("{id}")]
         [Authorize(Roles = "admin, director, moderator, manager")]
         public async Task<ActionResult<PartnerDetailsVm>> Get(int id)
         {
+
             var query = new GetPartnerDetailsQuery
             {
                 PartnerID = id

@@ -26,7 +26,6 @@ namespace GoodwillSingledb.Application.Goodwills.Queries.GetPartnerList
             }
 
             var partnersQuery = await partners
-                //.Where(partner => partner.PartnerID == request.PartnerID)
                 .ProjectTo<PartnerDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
             return new PartnerListVm { PartnerDtos = partnersQuery };
